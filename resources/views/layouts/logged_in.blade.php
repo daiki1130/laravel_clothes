@@ -5,7 +5,7 @@
     <ul class="header_nav">
       <div class="header_nav_left">
         <li>
-          Daily Blog
+          これこの値段で買える？？
         </li>
         <li>
           <a href="{{ route('top') }}">
@@ -17,6 +17,11 @@
         <li>
           <a href="{{ route('posts.create') }}">
             新規投稿
+          </a>
+        </li>
+        <li>
+          <a>
+            マイページ
           </a>
         </li>
         <li>
