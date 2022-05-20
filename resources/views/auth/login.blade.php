@@ -7,6 +7,7 @@
   <form method="POST" action="{{ route('login') }}">
       @csrf
       
+      
       <div class="login_contents">
           <label>
             メールアドレス:<br>
