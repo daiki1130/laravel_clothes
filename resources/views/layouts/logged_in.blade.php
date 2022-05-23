@@ -15,12 +15,12 @@
       </div>
       <div class="header_nav_right">
         <li>
-          <a href="{{ route('posts.create') }}">
+          <a href="{{ route('items.create') }}">
             新規投稿
           </a>
         </li>
         <li>
-          <a>
+          <a href="{{ route('users.show',Auth::user()) }}">
             マイページ
           </a>
         </li>
