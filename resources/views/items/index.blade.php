@@ -38,16 +38,40 @@
 <ul>
     @forelse($items as $item)
     <li>
-        投稿者名：{{ $item->user->name }}
+      投稿者名：{{ $item->user->name }}
     </li>
     <li>
-        投稿内容：<br>
-        {!! nl2br(e($item->post)) !!}
+      カテゴリー：{{ $item->category->name }}
     </li>
     <li>
-        投稿日時：
-        {{ $item->created_at }}
+      アイテム名：{{ $item->item_name }}
     </li>
+    <li>
+      購入金額：{{ $item->item_price }}
+    </li>
+    <li>
+      購入場所：{{ $item->item_place }}
+    </li>
+    <li>
+      商品説明：<br>
+      {!! nl2br(e($item->item_description)) !!}
+    </li>
+    @if($item->image !== '')
+      <img src="{{ asset('storage/' . $item->image) }}">
+    @else
+      <img src="{{ asset('images/no_image.png') }}">
+    @endif
+    <li>
+      投稿日時：
+      {{ $item->created_at }}
+    </li>
+    
+    <a class="like_button">{{ $item->isLikedBy(Auth::user()) ? '★' : '☆' }}</a>
+    <form method="post" class="like" action="{{ route('items.toggle_like', $item) }}">
+      @csrf
+      @method('patch')
+    </form>
+    
     @if (Auth::user()->id === $item->user_id)
     <li>
         <a href="{{ route('items.edit',$item) }}">編集</a>
@@ -64,4 +88,11 @@
     <li>投稿はありません</li>
     @endforelse
 </ul>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  /* global $ */
+  $('.like_button').on('click', (event) => {
+      $(event.currentTarget).next().submit();
+  })
+</script>
 @endsection

@@ -20,7 +20,7 @@
           </a>
         </li>
         <li>
-          <a href="{{ route('users.show',Auth::user()) }}">
+          <a href="{{ route('users.show', Auth::user()) }}">
             マイページ
           </a>
         </li>
