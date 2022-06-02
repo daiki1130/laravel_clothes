@@ -8,7 +8,17 @@ use App\Item;
 
 class UserController extends Controller
 {
-
+    public function base()
+    {
+        $user = \Auth::user();
+        $items = Item::all();
+        return view('layouts.default',[
+            'user' => $user,
+            'items' => $items,
+            'recommended_users' => User::recommend($user->id)->get()
+            ]);    
+    }
+    
     public function show($id)
     {
         $user = User::find($id);

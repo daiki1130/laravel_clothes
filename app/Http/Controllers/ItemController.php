@@ -12,16 +12,6 @@ use App\Category;
 class ItemController extends Controller
 {
 
-    public function index()
-    {
-        $user = \Auth::user();
-        $items = Item::all();
-        return view('items.index',[
-            'user' => $user,
-            'items' => $items,
-            'recommended_users' => User::recommend($user->id)->get()
-            ]);
-    }
 
     public function create()
     {
@@ -71,8 +61,29 @@ class ItemController extends Controller
     {
         $item = Item::find($id);
         $item->update($request->only([
-            'comment'
+            'item_name',
+            'category_id',
+            'item_price',
+            'item_place',
+            'item_description',
             ]));
+            
+        $path = '';
+        $image = $request->file('image');
+ 
+        if( isset($image) === true ){
+            $path = $image->store('item_photos', 'public');
+        }
+ 
+        $item = Item::find($id);
+ 
+        if($item->image !== ''){
+          \Storage::disk('public')->delete(\Storage::url($item->image));
+        }
+ 
+        $post->update([
+          'image' => $path,
+        ]);
         session()->flash('success', '投稿を編集しました');
         return redirect()->route('posts.index');
     }

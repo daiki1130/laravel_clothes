@@ -17,17 +17,12 @@
             </a>
         </li>
         <li>{{ $item->description }} </li>
-        <li>商品名：{{ $item->name }} {{ $item->price }}</li>
+        <li>アイテム名：{{ $item->name }} {{ $item->price }}</li>
         <li>カテゴリ：{{ $item->category->name }} {{ $item->updated_at }}</li>
         
-        @if($item->isPurchasedItems($item))
-        <li>売り切れ</li>
-        @else
-        <li>出品中</li>
-        @endif
     </div>
     @empty
-    <li>商品はありません。</li>
+    <li>アイテムはありません。</li>
     @endforelse
 </ul>
 @endsection
