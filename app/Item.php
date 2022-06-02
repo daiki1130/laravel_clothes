@@ -18,6 +18,10 @@ class Item extends Model
       return $this->belongsTo('App\Category');
     }
     
+    public function comments(){
+      return $this->hasMany('App\Comment');
+    }
+    
     // いいね機能    
     public function likes(){
       return $this->hasMany('App\Like');

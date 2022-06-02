@@ -1,0 +1,16 @@
+li {
+    list-style: none;
+}
+
+.side_left {
+    background-color: blue;
+}
+
+.side_right {
+    background-color: green;
+}
+
+.header_nav {
+    display: flex;
+    background-color: red;
+}

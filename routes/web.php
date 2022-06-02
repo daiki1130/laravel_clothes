@@ -3,7 +3,7 @@
 Auth::routes();
 
 // トップページ
-Route::get('/','ItemController@index')->name('top');
+Route::get('/','DefaultController@index')->name('top');
 
 //新規投稿
 Route::get('items/create','ItemController@create')->name('items.create');
@@ -18,6 +18,8 @@ Route::delete('items/{items}/destroy','ItemController@destroy')->name('items.des
 
 // いいね機能
 Route::patch('/items/{item}/toggle_like', 'LikeController@toggleLike')->name('items.toggle_like');
+
+Route::post('/items/{item}/store', 'CommentController@store')->name('comments.store');
 
 // フォロー機能
 Route::post('/users/{user}/follow', 'FollowController@store')->name('follows.store');
