@@ -1,34 +1,47 @@
 @extends('layouts.logged_in')
  
-@section('title', $title)
  
 @section('content')
-    <form method="post" action="{{ route('users.update',$user)}}"　enctype="multipart/form-data">
-        @csrf
-        @method('patch')
-        <a href="{{route('users.show',$user)}}">戻る</a>
-        <label>
-            名前:
-            <input type="text" name="name" value="{{ $user->name }}">
-        </label><br>
-        <label>
-            メールアドレス:
-            <input type="text" name="email" value="{{ $user->email }}">
-        </label><br>
-        <label>
-            プロフィール:<br>
-            <textarea name="user_profile" rows="10"> {{ $user->user_profile }}</textarea>
-        </label><br>
-        <label>
-            プロフィール画像：<br>
-            @if($user->image !== '')
-                <img src="{{ \Storage::url($user->image) }}">
-            @else
-                <img src="{{ asset('images/no_image.png') }}">
-            @endif
-            画像を選択：
-　          <input type="file" name="image">
-        </label>
-        <input type="submit" value="更新">
-    </form>
+<h1 class="title title_center"><i class="fas fa-tshirt"></i>プロフィール編集</h1>
+
+<form method="post" action="{{ route('users.update',$user) }}" enctype="multipart/form-data">
+  @csrf
+  @method('patch')
+  <div class="mx-auto" style="max-width: 350px;">
+    <div class="form-group form-inline">
+      <label>
+        <i class="fas fa-pen"></i> 名前：
+        <input class="form-control" type="text" name="name" value="{{ $user->name }}">
+      </label>
+    </div>
+    <div class="form-group form-inline">
+      <label>
+        <i class="fas fa-pen"></i> メールアドレス：
+        <input class="form-control" type="text" name="email" value="{{ $user->email }}">
+      </label>
+    </div>
+    <div class="form-group">
+      <label>
+        <i class="fas fa-pen"></i> プロフィール：
+        <textarea class="form-control" rows="5" cols="30" name="user_profile">{{ $user->user_profile }}</textarea>
+      </label>
+    </div>
+    <div class="form-group">
+      <label>
+        <i class="fas fa-pen"></i> プロフィール画像：
+        @if($user->user_image !== '')
+          <img src="{{ \Storage::url($user->user_image) }}" class="user_icon">
+        @else
+          <img src="{{ asset('images/no_image.png') }}">
+        @endif
+        <input class="form-control-file" type="file" name="user_image">
+      </label>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-9 text-right">
+      <button type="submit" class="btn btn-primary">更新</button>
+    </div>
+  </div>
+</form>
 @endsection

@@ -48,4 +48,13 @@ class User extends Authenticatable
         $result = $this->follow_users->pluck('id')->contains($user->id);
         return $result;
     }
+    
+    public function likes(){
+        return $this->hasMany('App\like');
+    }
+    
+    public function likedItems(){
+        return $this->belongsToMany('App\Item','likes')
+                    ->withPivot('created_at')->orderBy('pivot_created_at', 'desc');
+    }
 }

@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Auth;
 use App\User;
+use App\Category;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -34,6 +35,9 @@ class ViewComposerServiceProvider extends ServiceProvider
             }else{
                 $view->with('recommended_users',User::recommend(Auth::user()->id)->get());
             }
+            
+            $view->with('men_categories',Category::where('category_gender','men')->get());
+            $view->with('women_categories',Category::where('category_gender','women')->get());
         });
     }
 }
