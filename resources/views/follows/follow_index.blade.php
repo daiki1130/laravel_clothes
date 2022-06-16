@@ -27,7 +27,7 @@
   </ul>
 </div>
 @empty
-  フォローユーザーはいません。
+  フォローユーザーはいません
 @endforelse
 
 @endsection
