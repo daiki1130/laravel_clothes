@@ -1,93 +1,67 @@
 @extends(($login_user == '')?'layouts.not_logged_in':'layouts.logged_in')
 
-@section('header')
-
 @section('content')
-<h1>トップページ</h1>
+<h1 class="title"><i class="fas fa-tshirt"></i>投稿一覧</h1>
 
-<form action="{{ route('top') }}" method="GET">
+<!--検索ボックス-->
+<div class="serch_box">
+  <form method="get" action="{{ route('top') }}">
     <input type="text" placeholder="キーワードを入力" name="keyword" >
     <input type="submit" value="検索">
-</form>
-  
-<h2>タイムライン</h2>
-<ul>
+  </form>
+</div>
+
+<!--投稿一覧-->
+<div class="container">
+  <div class="row">
     @forelse($items as $item)
-    <li>
-      投稿者名：{{ $item->user->name }}
-    </li>
-    <li>
-      カテゴリー：{{ $item->category->name }}
-    </li>
-    <li>
-      アイテム名：{{ $item->item_name }}
-    </li>
-    <li>
-      購入金額：{{ $item->item_price }}
-    </li>
-    <li>
-      購入場所：{{ $item->item_place }}
-    </li>
-    <li>
-      商品説明：<br>
-      {!! nl2br(e($item->item_description)) !!}
-    </li>
-    @if($item->image !== '')
-      <img src="{{ asset('storage/' . $item->image) }}">
-    @else
-      <img src="{{ asset('images/no_image.png') }}">
-    @endif
-    <li>
-      投稿日時：
-      {{ $item->created_at }}
-    </li>
-<!--いいね機能-->
-    @empty($login_user)
-      <li>ログイン後にいいねできます</li>
-    @else
-      <a class="like_button">{{ $item->isLikedBy(Auth::user()) ? '★' : '☆' }}</a>
-      <form method="post" class="like" action="{{ route('items.toggle_like', $item) }}">
-        @csrf
-        @method('patch')
-      </form>
-    @endempty
-<!--投稿編集-->
-    @empty($login_user)
-    <li></li>
-    @else
-      @if(Auth::user()->id === $item->user_id)
-      <li>
-          <a href="{{ route('items.edit',$item) }}">編集</a>
-      </li>
-      <li>
-          <form method="post" action="{{ route('items.destroy',$item) }}">
-            @csrf
-            @method('delete')
-            <input type="submit" value="削除">
-          </form>
-      </li>
-      @endif
-    @endempty
-<!--コメント機能-->
-    <ul>
-      @forelse($item->comments as $comment)
-        <li>{{ $comment->user->name }}: {{ $comment->body }}</li>
-      @empty
-        <li>コメントはありません。</li>
-      @endforelse
-    </ul>
-    <form method="post" action="{{ route('comments.store',$item) }}">
-      @csrf
-      <input type="hidden" name="item_id" value="{{ $item->id }}">
-      <label>
-        <input type="text" name="comment_body">
-      </label>
-      <input type="submit" value="送信">
-    </form>
+    <div class="card-group col-lg-4 col-sm-6 col-12 mt-3 mb-2">
+        <div class="card">
+          <img class="card-img-top" src="{{ asset('storage/'.$item->item_image) }}" height="200">
+          <div class="card-img-overlay" height="200">
+            <div class="price_back">
+              ￥{{ $item->item_price }}
+            </div>
+            <div class="like_back hover">
+              @empty($login_user)
+              @else
+              <a class="like_button">{{ $item->isLikedBy(Auth::user()) ? '★' : '☆' }}</a>
+              <form method="post" class="like" action="{{ route('items.toggle_like', $item) }}">
+                @csrf
+                @method('patch')
+              </form>
+              @endempty
+            </div>
+          </div>
+          <div class="card-body pt-1 pb-1 px-2">
+            <div class="card-text">
+              <div class="float-left list-group user_link">
+                <a href="{{ route('users.show',$item->user) }}" class="list-group-item list-group-item-action">
+                @if($item->user->user_image != '')
+                  <img src="{{ asset('storage/' . $item->user->user_image) }}" class="user_icon">
+                @else
+                  <img src="{{ asset('images/no_image.png') }}" class="img-fluid">
+                @endif
+                {{ $item->user->name }}
+                </a>
+              </div>
+              <div class="float-right  list-group item_info">
+                <a class="list-group-item list-group-item-action" href="{{ route('items.show',$item) }}">詳細</a>
+                <div class="float-right like_comment_margin">
+                  <i class="far fa-star"></i>{{ $item->likedUsers()->count() }}
+                  <i class="far fa-comment"></i>{{ $item->comments()->count() }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
     @empty
-    <li>投稿はありません</li>
+    投稿はありません
     @endforelse
-</ul>
+  </div>
+</div>    
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
   /* global $ */

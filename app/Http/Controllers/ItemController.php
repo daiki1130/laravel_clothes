@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ItemRequest;
 use Auth;
 use App\Item;
 use App\User;
@@ -11,25 +12,26 @@ use App\Category;
 
 class ItemController extends Controller
 {
-
-
     public function create()
     {
         $user = \Auth::user();
-        $categories = Category::all();
+        $men_categories = Category::where('category_gender','men')->get();
+        $women_categories = Category::where('category_gender','women')->get();
+        
         return view('items.create',[
             'title' => '商品を出品',
             'user' => $user,
-            'categories' => $categories,
+            'men_categories' => $men_categories,
+            'women_categories' => $women_categories,
             ]);
     }
 
-    public function store(Request $request)
+    public function store(ItemRequest $request)
     {
         $path = '';
         $item_image = $request->file('item_image');
         if(isset($item_image) === true){
-            $path = $image->store('item_photos', 'public');
+            $path = $item_image->store('item_photos', 'public');
         }
         Item::create([
             'user_id' => Auth::user()->id,
@@ -41,23 +43,30 @@ class ItemController extends Controller
             'item_image' => $path,
             ]);
             session()->flash('success','投稿しました。');
-            return redirect()->route('top');
+            return redirect()->route('users.show');
     }
 
     public function show($id)
     {
-        //
+        $item = Item::find($id);
+        return view('items.show',[
+            'item' => $item,
+            ]);
     }
 
     public function edit($id)
     {
         $item = Item::find($id);
+        $men_categories = Category::where('category_gender','men')->get();
+        $women_categories = Category::where('category_gender','women')->get();
         return view('items.edit',[
             'item' => $item,
+            'men_categories' => $men_categories,
+            'women_categories' => $women_categories,
             ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(ItemRequest $request, $id)
     {
         $item = Item::find($id);
         $item->update($request->only([
@@ -67,9 +76,10 @@ class ItemController extends Controller
             'item_place',
             'item_description',
             ]));
-            
+        
+        // 画像更新
         $path = '';
-        $image = $request->file('image');
+        $image = $request->file('item_image');
  
         if( isset($image) === true ){
             $path = $image->store('item_photos', 'public');
@@ -77,20 +87,23 @@ class ItemController extends Controller
  
         $item = Item::find($id);
  
-        if($item->image !== ''){
-          \Storage::disk('public')->delete(\Storage::url($item->image));
+        if($item->item_image !== ''){
+          \Storage::disk('public')->delete(\Storage::url($item->item_image));
         }
  
-        $post->update([
-          'image' => $path,
+        $item->update([
+          'item_image' => $path,
         ]);
         session()->flash('success', '投稿を編集しました');
-        return redirect()->route('posts.index');
+        return redirect()->route('users.show');
     }
 
     public function destroy($id)
     {
-        //
+        $item = Item::find($id);
+        $item->delete();
+        session()->flash('success','投稿を消去しました。');
+        return redirect()->route('users.show');
     }
 
        public function __construct()

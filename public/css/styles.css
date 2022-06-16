@@ -1,16 +1,268 @@
+/*共通部分*/
+.wrapper {
+  background-image:
+    repeating-linear-gradient(to bottom,
+      transparent 25px,
+      rgba(0, 0, 0, 0.04) 26px,  rgba(0, 0, 0, 0.04) 26px,
+      transparent 27px,  transparent 51px, 
+      rgba(0, 0, 0, 0.04) 52px,  rgba(0, 0, 0, 0.04) 52px,
+      transparent 53px,  transparent 77px, 
+      rgba(0, 0, 0, 0.04) 78px,  rgba(0, 0, 0, 0.04) 78px,
+      transparent 79px,  transparent 103px, 
+      rgba(0, 0, 0, 0.04) 104px,  rgba(0, 0, 0, 0.04) 104px,
+      transparent 105px,  transparent 129px, 
+      rgba(0, 0, 0, 0.04) 130px,  rgba(0, 0, 0, 0.04) 130px),
+
+    repeating-linear-gradient(to right,
+      transparent 25px,
+      rgba(0, 0, 0, 0.04) 26px,  rgba(0, 0, 0, 0.04) 26px,
+      transparent 27px,  transparent 51px, 
+      rgba(0, 0, 0, 0.04) 52px,  rgba(0, 0, 0, 0.04) 52px,
+      transparent 53px,  transparent 77px, 
+      rgba(0, 0, 0, 0.04) 78px,  rgba(0, 0, 0, 0.04) 78px,
+      transparent 79px,  transparent 103px, 
+      rgba(0, 0, 0, 0.04) 104px,  rgba(0, 0, 0, 0.04) 104px,
+      transparent 105px,  transparent 129px, 
+      rgba(0, 0, 0, 0.04) 130px,  rgba(0, 0, 0, 0.04) 130px);
+}
+.link a {
+    color: black;
+    text-decoration: none;
+} 
+.body {
+    margin-bottom: 40px;    
+}
+
+.content {
+    margin: 40px 0;
+}
+
+.alert {
+    text-align: center;
+}
+
+.title {
+    border-bottom: solid 1px rgba(0,0,0,0.3);
+}
+
+.title_center {
+    text-align: center;
+}
+
+.user_icon {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 li {
     list-style: none;
 }
 
-.side_left {
-    background-color: blue;
+.hover:hover {
+    transform: scale(1.3, 1.3);
 }
 
+/*当サイトについて*/
+.site_info {
+    margin: 40px;
+}
+
+/*ヘッダー*/
+.carousel .carousel-item{
+    height: 300px;
+}
+
+.header_margin {
+    margin-top: 3px;
+}
+
+/*フッター*/
+footer {
+    background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer a {
+    color: black;
+    text-decoration: none;
+}
+
+/*左メニュー*/
+.user_info {
+    margin: 10px;
+    border: 1px solid #ccc;
+    outline: 2px solid #ccc;
+    border-radius: 6px;
+}
+
+.categories {
+    margin: 10px;
+    border: 1px solid #ccc;
+    outline: 2px solid #ccc;
+    border-radius: 6px;
+}
+
+.categories_wrapper {
+    margin-top: 100px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    outline: 2px solid #ccc;
+    border-radius: 6px;
+} 
+
+.categories_wrapper h2, .categories h3 {
+    font-size: 15px; 
+    text-align: center;
+}
+
+.category_list {
+    font-size: 10px;
+}
+
+.category_list a {
+    color: black;
+    text-decoration: none;
+}
+
+/*/右メニュー*/
 .side_right {
-    background-color: green;
+    margin-top: 100px;
 }
 
-.header_nav {
-    display: flex;
-    background-color: red;
+.user_info ul {
+    margin-bottom: 0px;
 }
+
+.user_info li {
+    border-bottom: solid 1px rgba(0,0,0,0.3);
+}
+
+.user_info_edit a , .user_info_link a{
+    text-align: center;
+    padding: 0;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.user_info_list a {
+    font-size: 10px;
+}
+
+.recommended_users {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    outline: 2px solid #ccc;
+    border-radius: 6px;
+}
+
+.recommended_users h2 {
+    margin: 5px;
+    font-size: 16px;    
+}
+
+.follow_wrapper a{
+    color: black;
+    text-decoration: none;
+}
+
+.follow {
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+/*ログインページ*/
+.login_wrapper {
+    margin: 20px;
+}
+
+/*投稿一覧*/
+.price_back {
+    background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    box-shadow: 4px 4px;
+    width: 40%;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+}
+
+.like_back {
+    background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    width: 10%;
+    border-radius: 60%;
+    position: absolute;
+    right: 10px;
+    bottom: 80px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+}
+
+.item_info a {
+    padding: 2px;
+    text-align: center;
+}
+
+.user_link a {
+    padding: 5px;
+}
+
+.like_comment_margin {
+    margin-top: 10px;
+}
+
+/*投稿詳細画面*/
+.item_body p {
+    border-bottom: solid 1px rgba(0,0,0,0.3);  
+}
+
+.comment_wrapper {
+    margin-top: 10px;
+}
+
+.comment {
+    margin-top: 5px;
+    border-bottom: solid 1px rgba(0,0,0,0.3); 
+}
+
+.comment input {
+    border: solid 1px rgba(0,0,0,0.3);
+}
+
+.edit_button {
+    margin-top: 5px;
+}
+
+/*ユーザー詳細画面*/
+.user_wrapper{
+    width: 70%;
+    padding: 20px;
+    border-radius: 10px;
+    background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    background-size: auto 100%;
+    
+}
+
+.icon_flex {
+    display: flex;
+}
+
+.user_flex li{
+    margin: 10px;
+}
+
+.user_flex {
+    display: flex;
+}
+
+.user_name {
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.serch_box input{
+    border: solid 1px rgba(0,0,0,0.3);
+}
+
+

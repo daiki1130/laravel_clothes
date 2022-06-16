@@ -1,30 +1,47 @@
-@extends('layouts.not_logged_in')
+@extends('layouts.login_register')
  
-@section('content')
-<div>
-  <h1>ユーザー登録</h1>
- 
-  <form method="POST" action="{{ route('register') }}">
-    @csrf
-    <div class="register_contents">
-      <label>
-        ユーザー名:<br>
-        <input type="text" name="name">
-      </label><br>
-      <label>
-        メールアドレス:<br>
-        <input type="email" name="email">
-      </label><br>
-      <label>
-        パスワード:<br>
-        <input type="password" name="password">
-      </label><br>
-      <label>
-        パスワード（確認用）:<br>
-        <input type="password" name="password_confirmation" >
-      </label><br>
-      <input class="post_button" type="submit" value="登録">
+@section('body')
+<div class="container login_wrapper">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <div class="d-flex justify-content-center">
+        <h1>新規登録</h1>
+      </div>
+      <form method="POST" action="{{ route('register') }}">
+        @csrf
+        <div class="row justify-content-center">
+          <div class="form-group">
+            <label>
+              ユーザー名：
+              <input class="form-control" type="text" name="name">
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              メールアドレス：
+              <input class="form-control" type="email" name="email">
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              パスワード：
+              <input class="form-control" type="text" name="password">
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              パスワード（確認用）：
+              <input class="form-control" type="text" name="password_confirmation">
+            </label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-9 text-right">
+              <button type="submit" class="btn btn-primary">新規登録</button>
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
 </div>
 @endsection
