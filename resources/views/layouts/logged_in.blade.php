@@ -34,7 +34,7 @@
 @endsection
 
 @section('body')
-<div class="container">
+<div class="container-fluid">
   <div class="row">
 <!--左メニュー-->
     <div class="col-12 col-sm-2 side_left">
@@ -48,11 +48,11 @@
             <div class="list-group">
               @foreach($men_categories as $men_category)
               <form method="get" action="{{ route('top') }}">
-                <button class="category_list list-group-item list-group-item-action" type="submit" name="id" value="{{ $men_category->id }}">
-                  <a href="{{ route('top') }}">
-                  <i class="far fa-arrow-alt-circle-right"></i>{{ $men_category->category_name }}
-                  </a>
-                </button>
+                <a href="{{ route('top') }}">
+                  <button class="category_list list-group-item list-group-item-action" type="submit" name="id" value="{{ $men_category->id }}">
+                    <i class="far fa-arrow-alt-circle-right"></i>{{ $men_category->category_name }}
+                  </button>
+                </a>
               </form>
               @endforeach
             </div>

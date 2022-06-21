@@ -28,6 +28,7 @@ class ItemController extends Controller
 
     public function store(ItemRequest $request)
     {
+        $user = \Auth::user();
         $path = '';
         $item_image = $request->file('item_image');
         if(isset($item_image) === true){
@@ -43,7 +44,7 @@ class ItemController extends Controller
             'item_image' => $path,
             ]);
             session()->flash('success','投稿しました。');
-            return redirect()->route('users.show');
+            return redirect()->route('users.show',$user);
     }
 
     public function show($id)
@@ -68,6 +69,7 @@ class ItemController extends Controller
 
     public function update(ItemRequest $request, $id)
     {
+        $user = \Auth::user();
         $item = Item::find($id);
         $item->update($request->only([
             'item_name',
@@ -95,15 +97,16 @@ class ItemController extends Controller
           'item_image' => $path,
         ]);
         session()->flash('success', '投稿を編集しました');
-        return redirect()->route('users.show');
+        return redirect()->route('users.show',$user);
     }
 
     public function destroy($id)
     {
+        $user = \Auth::user();
         $item = Item::find($id);
         $item->delete();
         session()->flash('success','投稿を消去しました。');
-        return redirect()->route('users.show');
+        return redirect()->route('users.show',$user);
     }
 
        public function __construct()
