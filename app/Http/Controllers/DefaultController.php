@@ -14,7 +14,7 @@ class DefaultController extends Controller
     public function index(Request $request)
     {
         $user = \Auth::user();
-        $items = Item::all();
+        $items = Item::orderBy('created_at','desc')->paginate(12);
         
         
         // 性別検索

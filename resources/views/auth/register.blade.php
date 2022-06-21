@@ -3,7 +3,7 @@
 @section('body')
 <div class="container login_wrapper">
   <div class="row justify-content-center">
-    <div class="col-4">
+    <div class="col-3">
       <div class="d-flex justify-content-center">
         <h1>新規登録</h1>
       </div>

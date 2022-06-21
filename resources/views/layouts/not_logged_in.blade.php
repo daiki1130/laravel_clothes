@@ -42,11 +42,11 @@
             <div class="list-group">
               @foreach($men_categories as $men_category)
               <form method="get" action="{{ route('top') }}">
-                <button class="category_list list-group-item list-group-item-action" type="submit" name="id" value="{{ $men_category->id }}">
-                  <a href="{{ route('top') }}">
-                  <i class="far fa-arrow-alt-circle-right"></i>{{ $men_category->category_name }}
-                  </a>
-                </button>
+                <a href="{{ route('top') }}">
+                  <button class="category_list list-group-item list-group-item-action" type="submit" name="id" value="{{ $men_category->id }}">
+                    <i class="far fa-arrow-alt-circle-right"></i>{{ $men_category->category_name }}
+                  </button>
+                </a>
               </form>
               @endforeach
             </div>
@@ -90,7 +90,11 @@
                 {{ $recommended_user->name }}
               </a>
               @empty($login_user)
-                <li>ログイン後にフォローできます</li>
+                <li>
+                  <a href="{{ route('top') }}">
+                    ログイン後にフォローできます
+                  </a>
+                </li>
               @else
                 @if(Auth::user()->isFollowing($recommended_user))
                   <form method="post" action="{{route('follows.destroy', $recommended_user)}}" class="follow list-group-item list-group-item-action">
